@@ -25,3 +25,7 @@ def chat(body: Ask):
     except Exception as e:
         raise HTTPException(500, f"AI error: {e}")
     return {"answer": text, "sources": sources}
+
+@app.api_route("/health", methods=["GET", "HEAD"])
+def health():
+    return {"status": "ok"}
