@@ -1,0 +1,130 @@
+SIET Internal Knowledge Base (Student Information)
+Campus Life
+
+Shambhunath Institute of Engineering and Technology (SIET), Prayagraj me students ke liye academics ke saath campus activities aur clubs bhi available hain.
+
+Rajesh Canteen
+
+Campus ki canteen ka naam Rajesh Canteen hai.
+
+Yeh students ke beech popular hangout place maana jata hai.
+
+Popular Faculty
+Amreesh Pandey Sir
+
+Subject: Digital Electronics
+
+Students ke beech kaafi favorite teacher maane jate hain.
+
+Mathur Sir
+
+Subject: Mathematics
+
+Mathematics ko achhe tareeke se padhane ke liye jane jate hain.
+
+Ritesh Pandey Sir
+
+Subject: Mathematics
+
+Generally 2nd semester me padhate hain.
+
+Unki teaching high-level thinking aur conceptual approach par focus karti hai.
+
+Eureka Fest
+
+Eureka SIET ka ek major college fest hai.
+
+Student input ke according, is fest me kai famous music artists perform kar chuke hain, jaise:
+
+Honey Singh
+
+Badshah
+
+King
+
+Robotics Club
+
+SIET me ek Robotics Club hai.
+
+Club me students:
+
+Team bana kar projects develop karte hain.
+
+Robotics aur hardware-based ideas par collaborate karte hain.
+
+Practical learning aur innovation par kaam karte hain.
+
+College Director
+
+- Director: R. K. Singh
+
+Suggested RAG Metadata
+
+Chunk
+
+	
+
+Keywords
+
+
+
+
+Rajesh Canteen
+
+	
+
+canteen, food, Rajesh Canteen
+
+
+
+
+Amreesh Pandey
+
+	
+
+digital electronics, teacher
+
+
+
+
+Mathur Sir
+
+	
+
+mathematics, faculty
+
+
+
+
+Ritesh Pandey
+
+	
+
+2nd semester, maths
+
+
+
+
+Eureka Fest
+
+	
+
+Honey Singh, Badshah, King, fest
+
+
+
+
+Robotics Club
+
+	
+
+projects, robotics, club
+
+
+
+
+Director
+
+	
+
+RK Singh

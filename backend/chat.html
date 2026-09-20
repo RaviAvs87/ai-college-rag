@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><title>College Chat</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><div class="frame">
+<header><a class="logo" href="index.html"><i>🧠</i><span><b>AI</b> College Assistant<small>Your College Knowledge Partner</small></span></a><span class="sel" style="margin:0 auto">🏛 Shambhunath Institute ⌄</span><button class="tg" aria-label="Toggle theme">☀ ☾</button><a class="btn sm" href="college_access.html">⌗ Enter College Code</a></header>
+<div class="chat"><div class="card cbox"><div class="msgs" id="m" style="overflow:auto;max-height:52vh"></div>
+<div class="chips">Suggested Questions:<button>Fee Structure</button><button>Syllabus</button><button>Exam Dates</button><button>Placements</button><button>Rules &amp; Policies</button></div>
+<form class="input" id="f"><input id="q" placeholder="Ask anything about your college..." aria-label="Ask"><button>➤</button></form></div>
+<aside class="cat"><a href="chat.html"><span class="ico">📖</span>Syllabus &amp; Courses</a><a href="chat.html"><span class="ico">📋</span>Notices &amp; Circulars</a><a href="chat.html"><span class="ico">💼</span>Placements &amp; Internships</a><a href="chat.html"><span class="ico">🛡</span>College Rules &amp; Policies</a><a href="chat.html"><span class="ico">📝</span>Exams &amp; Results</a><a href="chat.html"><span class="ico">🔍</span>General Queries</a></aside></div></div>
+<script src="app.js"></script><script>
+const API='http://localhost:8000',code=new URLSearchParams(location.search).get('code');
+if(!code)location.href='college_access.html';
+const m=document.getElementById('m'),q=document.getElementById('q');
+function add(text,me,sources){const w=document.createElement('div');w.className='msg'+(me?' me':'');
+const b=document.createElement('div');b.className=me?'u':'b';b.style.whiteSpace='pre-wrap';b.textContent=text;
+if(sources)sources.forEach(s=>{const p=document.createElement('div');p.className='src';p.textContent='📄 '+s.file+' (Page '+s.page+')';b.appendChild(document.createElement('br'));b.appendChild(p)});
+const i=document.createElement('span');i.className='ico';i.textContent=me?'👤':'🧠';
+me?(w.append(b,i)):(w.append(i,b));m.appendChild(w);m.scrollTop=m.scrollHeight;return b}
+async function send(t){if(!t)return;q.value='';add(t,true);const w=add('Thinking…',false);
+try{const r=await fetch(API+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({college_code:code,question:t})});
+const d=await r.json();w.parentNode.remove();r.ok?add(d.answer,false,d.sources):add(d.detail||'Something went wrong.',false)}
+catch(e){w.textContent='Cannot reach the backend. Is it running on port 8000?'}}
+document.getElementById('f').onsubmit=e=>{e.preventDefault();send(q.value.trim())};
+document.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>send(b.textContent));
+add('Hi! Ask me anything about your college — fees, syllabus, exams, rules and more.',false);
+</script></body></html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>College Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="frame">
+        <header><a class="logo" href="index.html"><i>🧠</i><span><b>AI</b> College Assistant<small>Your College
+                        Knowledge Partner</small></span></a><span class="sel" style="margin:0 auto">🏛 Shambhunath
+                Institute </span><button class="tg" aria-label="Toggle theme">☀ ☾</button><a class="btn sm"
+                href="college_access.html">⌗ Enter College Code</a></header>
+        <div class="chat">
+            <div class="card cbox">
+                <div class="msgs" id="m">
+
+                    <div class="msg me">
+                        <div class="u">What is the BTech fee structure for 2nd year?</div><span class="ico">👤</span>
+                    </div>
+                    <div class="msg"><span class="ico">🧠</span>
+                        <div class="b">For 2nd year BTech (as per latest official document):<br>• Tuition Fee : ₹95,000
+                            / year<br>• Bus Fee : ₹24,000 / year<br>• Total Annual Fee : ₹1,19,000 / year<br>(Note: Fees
+                            may be subject to change. Refer to the official notice for the latest updates.)<br></div>
+                    </div>
+                    
+                </div>
+                <div class="chips">Suggested Questions:<button>Fee
+                        Structure</button><button>Syllabus</button><button>Exam
+                        Dates</button><button>Placements</button><button>Rules &amp; Policies</button></div>
+                <form class="input" id="f"><input id="q" placeholder="Ask anything about your college..."
+                        aria-label="Ask"><button>➤</button></form>
+            </div>
+            <aside class="cat"><a href="chat.html"><span class="ico">📖</span>Syllabus &amp; Courses</a><a
+                    href="chat.html"><span class="ico">📋</span>Notices &amp; Circulars</a><a href="chat.html"><span
+                        class="ico">💼</span>Placements &amp; Internships</a><a href="chat.html"><span
+                        class="ico">🛡</span>College Rules &amp; Policies</a><a href="chat.html"><span
+                        class="ico">📝</span>Exams &amp; Results</a><a href="chat.html"><span
+                        class="ico">🔍</span>General Queries</a></aside>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+const API = 'http://127.0.0.1:8000';
+const code = new URLSearchParams(location.search).get('code');
+const m = document.getElementById('m'), q = document.getElementById('q');
+
+function addMsg(text, who, sources) {
+  const row = document.createElement('div');
+  row.className = 'msg' + (who === 'me' ? ' me' : '');
+  const ico = document.createElement('span');
+  ico.className = 'ico';
+  ico.textContent = who === 'me' ? '👤' : '🧠';
+  const bub = document.createElement('div');
+  bub.className = who === 'me' ? 'u' : 'b';
+  bub.style.whiteSpace = 'pre-wrap';
+  bub.textContent = text;
+  (sources || []).forEach(s => {
+    const c = document.createElement('div');
+    c.className = 'src';
+    c.textContent = '📄 ' + s.file + ' (Page ' + s.page + ')';
+    bub.appendChild(c);
+  });
+  if (who === 'me') { row.appendChild(bub); row.appendChild(ico); }
+  else { row.appendChild(ico); row.appendChild(bub); }
+  m.appendChild(row);
+  m.scrollTop = m.scrollHeight;
+  return row;
+}
+
+async function send(t) {
+  if (!t) return;
+  q.value = '';
+  addMsg(t, 'me');
+  const wait = addMsg('Looking this up in official college documents…', 'bot');
+  try {
+    const r = await fetch(API + '/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ college_code: code, question: t })
+    });
+    if (!r.ok) throw new Error('Server error ' + r.status);
+    const data = await r.json();
+    wait.remove();
+    addMsg(data.answer, 'bot', data.sources);
+  } catch (e) {
+    wait.remove();
+    addMsg('Error: ' + e.message + '. Kya backend chal raha hai?', 'bot');
+  }
+}
+
+document.getElementById('f').onsubmit = e => { e.preventDefault(); send(q.value.trim()); };
+document.querySelectorAll('.chips button').forEach(b => b.onclick = () => send(b.textContent));
+</script>
+</body>
+
+</html>
