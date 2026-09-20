@@ -22,7 +22,7 @@ chromadb = importlib.import_module("chromadb")
 
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-CHAT_MODEL = os.getenv("CHAT_MODEL", "gemini-2.5-flash")
+CHAT_MODEL = os.getenv("CHAT_MODEL", "gemini-3.6-flash")
 EMBED_MODEL = os.getenv("EMBED_MODEL", "gemini-embedding-001")
 db = chromadb.PersistentClient(path="chroma_db")
 DATA = Path("data")
