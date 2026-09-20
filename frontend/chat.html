@@ -46,7 +46,9 @@
     </div>
     <script src="app.js"></script>
     <script>
-const API = 'http://127.0.0.1:8000';
+const API = (location.hostname==='localhost' || location.hostname==='127.0.0.1')
+  ? 'http://localhost:8000'
+  : 'https://ai-college-rag.onrender.com';
 const code = new URLSearchParams(location.search).get('code');
 const m = document.getElementById('m'), q = document.getElementById('q');
 
