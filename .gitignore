@@ -5,7 +5,7 @@ venv/
 __pycache__/
 *.pyc
 backend/chroma_db/
-backend/data/*/*.pdf
+
 .DS_Store
 Thumbs.db
 .vscode/
